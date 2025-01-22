@@ -1,0 +1,24 @@
+class Solution {
+    public int minSwaps(String s) {
+        int ones = 0, zeros = 0, swaps1 = 0, swaps2 = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '1') ones++;
+            else zeros++;
+        }
+        if (Math.abs(ones - zeros) > 1) return -1;
+        
+        for (int i = 0; i < s.length(); i++) {
+            if (i % 2 == 0) {
+                if (s.charAt(i) != '0') swaps1++;
+                if (s.charAt(i) != '1') swaps2++;
+            } else {
+                if (s.charAt(i) != '1') swaps1++;
+                if (s.charAt(i) != '0') swaps2++;
+            }
+        }
+        
+        if (ones > zeros) return swaps2 / 2;
+        if (zeros > ones) return swaps1 / 2;
+        return Math.min(swaps1, swaps2) / 2;
+    }
+}
